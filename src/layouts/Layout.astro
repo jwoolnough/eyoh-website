@@ -1,34 +1,136 @@
 ---
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Colophon from "@/components/Colophon.astro";
+
 interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{title} | Eat Your Own Head</title>
   </head>
   <body>
-    <slot />
+    <div class="page">
+      <Header />
+      <main class="page__content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <Colophon />
   </body>
 </html>
-<style is:global>
+
+<style is:global lang="scss">
   :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
+    --color-primary-500: #dc9d76;
+    --color-white: #fff;
+    --color-black-500: #8b8b8b;
+    --color-black-800: #2a2a2a;
+    --color-black-900: #1a1a1a;
+    --color-black-950: #121212;
+
+    --anim-duration: 200ms;
   }
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition-duration: var(--anim-duration);
+    transition-property: none;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-500);
+    color: var(--color-white);
+  }
+
   html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-    background-size: 224px;
+    font: 300 1em/1.5 "Brother 1816";
+    background-color: var(--color-black-900);
+    color: var(--color-black-500);
+  }
+
+  body {
+    font-size: 0.875rem;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:where(:hover) {
+    color: var(--color-white);
+  }
+
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.2;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--color-white);
+  }
+
+  h4 {
+    font-size: 1.125rem;
+  }
+
+  .container {
+    max-width: 75rem;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .page,
+  .page__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page {
+    min-height: 100dvh;
+  }
+
+  .page__content {
+    flex-grow: 1;
+  }
+
+  .link {
+    font-weight: 500;
+    color: var(--color-primary-500);
+    text-transform: uppercase;
+    transition-property: color, text-decoration-color;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+
+    &:hover {
+      color: var(--color-white);
+      text-decoration-color: currentColor;
+    }
   }
 </style>
