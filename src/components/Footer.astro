@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" id="mailing-list">
   <div class="container">
     <h4>Sign up to our newsletter</h4>
     <form
@@ -14,9 +14,14 @@
   </div>
 </footer>
 
-<style>
+<style lang="scss">
   .footer {
     background-color: var(--color-black-950);
-    padding: 3rem 1.5rem;
+    padding: 1.5rem;
+
+    @include media-query(sm) {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
   }
 </style>

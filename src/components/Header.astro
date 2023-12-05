@@ -1,141 +1,44 @@
 ---
-const { pathname } = Astro.url;
-
-const socialItems = [
-  {
-    title: "Facebook",
-    url: "https://facebook.com/eatyourownheadmusic",
-    icon: "icon",
-  },
-];
-
-const navItems = [
-  {
-    title: "Home",
-    url: "/",
-  },
-  {
-    title: "Live",
-    url: "/live",
-  },
-  {
-    title: "Music",
-    url: "/music",
-  },
-  {
-    title: "Videos",
-    url: "/videos",
-  },
-  {
-    title: "Press",
-    url: "/press",
-  },
-  {
-    title: "Merch",
-    url: "/contact",
-  },
-  {
-    title: "Contact",
-    url: "/contact",
-  },
-];
+import Nav from "./header/Nav.astro";
+import Social from "./header/Social.astro";
 ---
 
 <header class="header">
   <div class="header__container container">
     <a class="logo" href="/">Eat Your Own Head</a>
-    <!-- <ul class="socials">
-      {
-        socialItems.map(({ title, icon, url }) => (
-          <li>
-            <a href={url} aria-label={title}>
-              {icon}
-            </a>
-          </li>
-        ))
-      }
-    </ul> -->
+    <Social />
 
-    <nav class="nav">
-      <ul class="nav__list">
-        {
-          navItems.map(({ title, url }) => (
-            <li>
-              <a
-                href={url}
-                class:list={["nav__link", pathname === url && "is-current"]}
-              >
-                {title}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <Nav />
   </div>
 </header>
 
-<style>
+<style lang="scss">
   .header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    padding: 3rem 1.5rem;
+    padding: 1.5rem;
     color: var(--color-white);
     font-weight: 400;
     z-index: 1;
+
+    @include media-query(sm) {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
   }
 
   .header__container {
-    display: flex;
-    align-items: center;
+    @include media-query(sm) {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .logo {
     font-size: 1.125rem;
+    font-weight: 500;
     text-transform: uppercase;
-  }
-
-  .socials {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .nav {
-    margin-left: auto;
-  }
-
-  .nav__list {
-    display: flex;
-    margin-left: -0.75rem;
-    margin-right: -0.75rem;
-  }
-
-  .nav__list:has(.nav__link:hover) .nav__link:not(:hover) {
-    opacity: 0.5;
-  }
-
-  .nav__link {
-    transition-property: color, opacity;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-
-  .nav__link.is-current {
-    position: relative;
-    color: var(--color-primary-500);
-    opacity: 1 !important;
-  }
-
-  .nav__link.is-current::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    translate: -50%;
-    top: -3.25rem;
-    border-style: solid;
-    border-width: 8px 5px 0 5px;
-    border-color: var(--color-primary-500) transparent transparent transparent;
   }
 </style>

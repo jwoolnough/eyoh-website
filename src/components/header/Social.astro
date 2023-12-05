@@ -1,0 +1,101 @@
+---
+import Icon from "astro-icon";
+
+const socialItems = [
+  {
+    title: "Spotify",
+    url: "https://open.spotify.com/artist/6xuvJjkb2JNTf4MXK7bSyM",
+    icon: "spotify",
+  },
+  {
+    title: "Apple Music",
+    url: "https://music.apple.com/gb/artist/eat-your-own-head/1535887925",
+    icon: "apple-music",
+  },
+  {
+    title: "Instagram",
+    url: "https://www.instagram.com/eatyourownheadmusic/",
+    icon: "instagram",
+  },
+  {
+    title: "Facebook",
+    url: "https://facebook.com/eatyourownheadmusic",
+    icon: "facebook",
+  },
+  {
+    title: "YouTube",
+    url: "https://www.youtube.com/channel/UCQ8dd_IORwUqRo4YVjWyHFA",
+    icon: "youtube",
+  },
+  {
+    title: "Twitter",
+    url: "https://twitter.com/eyohmusic?lang=en",
+    icon: "twitter",
+  },
+  {
+    title: "Mailing list",
+    url: "#mailing-list",
+    icon: "mail",
+  },
+];
+---
+
+<ul class="social">
+  {
+    socialItems.map(({ title, icon, url }) => (
+      <li>
+        <a href={url} aria-label={title} class="social__link">
+          <Icon
+            name={icon}
+            class:list={["social__icon", `social__icon--${icon}`]}
+          />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  .social {
+    display: flex;
+    gap: 0.75rem;
+
+    @include media-query(max-sm) {
+      margin-top: 0.75rem;
+    }
+
+    @include media-query(sm) {
+      margin-left: 2rem;
+    }
+  }
+
+  .social__link {
+    color: var(--color-black-500);
+    transition-property: color;
+
+    &:hover {
+      color: var(--color-white);
+    }
+  }
+
+  .social__icon {
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 1.5;
+
+    @include media-query(sm) {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .social__icon--spotify {
+    :global(path) {
+      stroke: none;
+      fill: currentColor;
+    }
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+const { pathname } = Astro.url;
+
+const navItems = [
+  {
+    title: "Home",
+    url: "/",
+  },
+  {
+    title: "Live",
+    url: "/live",
+  },
+  {
+    title: "Music",
+    url: "/music",
+  },
+  {
+    title: "Videos",
+    url: "/videos",
+  },
+  {
+    title: "Press",
+    url: "/press",
+  },
+  {
+    title: "Merch",
+    url: "/contact",
+  },
+  {
+    title: "Contact",
+    url: "/contact",
+  },
+];
+---
+
+<nav class="nav">
+  <ul class="nav__list">
+    {
+      navItems.map(({ title, url }) => (
+        <li>
+          <a
+            href={url}
+            class:list={["nav__link", pathname === url && "is-current"]}
+          >
+            {title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style lang="scss">
+  .nav {
+    margin-left: auto;
+
+    @include media-query(max-sm) {
+      display: none;
+    }
+  }
+
+  .nav__list {
+    display: flex;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+
+    &:has(.nav__link:hover) .nav__link:not(:hover) {
+      opacity: 0.5;
+    }
+  }
+
+  .nav__link {
+    transition-property: color, opacity;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+
+    &.is-current {
+      position: relative;
+      color: var(--color-primary-500);
+      opacity: 1 !important;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        translate: -50%;
+        top: -3.25rem;
+        border-style: solid;
+        border-width: 8px 5px 0 5px;
+        border-color: var(--color-primary-500) transparent transparent
+          transparent;
+      }
+    }
+  }
+</style>

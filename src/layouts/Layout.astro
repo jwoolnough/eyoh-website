@@ -59,6 +59,7 @@ const { title, description } = Astro.props;
   }
 
   html {
+    // TODO: Webfont
     font: 300 1em/1.5 "Brother 1816";
     background-color: var(--color-black-900);
     color: var(--color-black-500);
@@ -94,8 +95,20 @@ const { title, description } = Astro.props;
     color: var(--color-white);
   }
 
-  h4 {
+  h1 {
     font-size: 1.125rem;
+
+    @include media-query(md) {
+      font-size: 1.5rem;
+    }
+  }
+
+  h4 {
+    font-size: 0.875rem;
+
+    @include media-query(sm) {
+      font-size: 1.125rem;
+    }
   }
 
   .container {
@@ -120,6 +133,11 @@ const { title, description } = Astro.props;
   }
 
   .link {
+    display: inline-block;
+    font: inherit;
+    background: none;
+    border: none;
+    padding: 0;
     font-weight: 500;
     color: var(--color-primary-500);
     text-transform: uppercase;

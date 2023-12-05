@@ -1,0 +1,18 @@
+$breakpoints: (
+  max-sm: "max-width: 639px",
+  sm: "min-width: 640px",
+  max-md: "max-width: 959px",
+  md: "min-width: 960px",
+);
+
+@mixin media-query($key) {
+  $query: map-get($breakpoints, $key);
+
+  @if ($query) {
+    @media screen and (#{$query}) {
+      @content;
+    }
+  } @else {
+    @error '`#{key}` missing from $breakpoints';
+  }
+}
