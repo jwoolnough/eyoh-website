@@ -5,8 +5,10 @@ import Social from "./header/Social.astro";
 
 <header class="header">
   <div class="header__container container">
-    <a class="logo" href="/">Eat Your Own Head</a>
-    <Social />
+    <div class="header__identity">
+      <a class="logo" href="/">Eat Your Own Head</a>
+      <Social />
+    </div>
 
     <Nav />
   </div>
@@ -23,7 +25,7 @@ import Social from "./header/Social.astro";
     font-weight: 400;
     z-index: 1;
 
-    @include media-query(sm) {
+    @include media-query(md) {
       padding-top: 3rem;
       padding-bottom: 3rem;
     }
@@ -33,6 +35,14 @@ import Social from "./header/Social.astro";
     @include media-query(sm) {
       display: flex;
       align-items: center;
+    }
+  }
+
+  .header__identity {
+    @include media-query(md) {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
     }
   }
 

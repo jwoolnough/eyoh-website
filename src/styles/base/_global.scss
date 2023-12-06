@@ -1,0 +1,45 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition-property: none;
+
+  @media screen and (prefers-reduced-motion: no-preference) {
+    transition-duration: var(--anim-duration);
+  }
+}
+
+html {
+  // TODO: Webfont
+  font: 300 1em/1.5 "Brother 1816";
+  background-color: var(--color-black-900);
+  color: var(--color-black-500);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+
+  @media screen and (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  font-size: 0.875rem;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+a:where(:hover) {
+  color: var(--color-white);
+}
+
+::selection {
+  background-color: var(--color-primary-500);
+  color: var(--color-white);
+}
+
+// TODO: Focus ring

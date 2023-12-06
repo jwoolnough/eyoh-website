@@ -33,8 +33,45 @@ const navItems = [
 ];
 ---
 
+<script>
+  const HAS_ACTIVE_NAV_CLASS = "has-active-nav";
+  const NAV_ACTIVE_CLASS = "is-active";
+  const ENTERING_CLASS = "is-entering";
+  const EXITING_CLASS = "is-exiting";
+
+  const navToggle = document.getElementById("nav-toggle");
+  const navList = document.getElementById("nav-list");
+
+  if (!navToggle || !navList) {
+    throw new Error("missing required elements");
+  }
+
+  const handleClick = () => {
+    navToggle.classList.remove(ENTERING_CLASS, EXITING_CLASS);
+    navList.classList.toggle(NAV_ACTIVE_CLASS);
+    document.documentElement.classList.toggle(HAS_ACTIVE_NAV_CLASS);
+
+    navToggle.classList.add(
+      !navList.classList.contains(NAV_ACTIVE_CLASS)
+        ? ENTERING_CLASS
+        : EXITING_CLASS,
+    );
+  };
+
+  navToggle.addEventListener("click", handleClick);
+</script>
+
 <nav class="nav">
-  <ul class="nav__list">
+  <button
+    type="button"
+    class="nav__toggle"
+    id="nav-toggle"
+    aria-label="Toggle nav"
+  >
+    <span></span>
+  </button>
+
+  <ul class="nav__list" id="nav-list">
     {
       navItems.map(({ title, url }) => (
         <li>
@@ -53,42 +90,57 @@ const navItems = [
 <style lang="scss">
   .nav {
     margin-left: auto;
+  }
 
-    @include media-query(max-sm) {
+  .nav__toggle {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+
+    @include media-query(sm) {
       display: none;
     }
   }
 
   .nav__list {
-    display: flex;
-    margin-left: -0.75rem;
-    margin-right: -0.75rem;
+    @include media-query(sm) {
+      display: flex;
+      margin-left: -0.75rem;
+      margin-right: -0.75rem;
 
-    &:has(.nav__link:hover) .nav__link:not(:hover) {
-      opacity: 0.5;
+      &:has(.nav__link:hover) .nav__link:not(:hover) {
+        opacity: 0.5;
+      }
     }
   }
 
   .nav__link {
     transition-property: color, opacity;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
 
-    &.is-current {
-      position: relative;
-      color: var(--color-primary-500);
-      opacity: 1 !important;
+    @include media-query(sm) {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        translate: -50%;
-        top: -3.25rem;
-        border-style: solid;
-        border-width: 8px 5px 0 5px;
-        border-color: var(--color-primary-500) transparent transparent
-          transparent;
+      &.is-current {
+        position: relative;
+        color: var(--color-primary-500);
+        opacity: 1 !important;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          translate: -50%;
+          top: -2.75rem;
+          border-style: solid;
+          border-width: 8px 5px 0 5px;
+          border-color: var(--color-primary-500) transparent transparent
+            transparent;
+
+          @include media-query(md) {
+            top: -3.25rem;
+          }
+        }
       }
     }
   }

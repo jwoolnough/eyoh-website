@@ -1,0 +1,13 @@
+.page,
+.page__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  min-height: 100dvh;
+}
+
+.page__content {
+  flex-grow: 1;
+}
