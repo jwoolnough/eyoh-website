@@ -4,7 +4,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition-property: none;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
 
   @media screen and (prefers-reduced-motion: no-preference) {
     transition-duration: var(--anim-duration);
@@ -13,7 +15,9 @@
 
 html {
   // TODO: Webfont
-  font: 300 1em/1.5 "Brother 1816";
+  font:
+    300 1em/1.5 "brother-1816",
+    sans-serif;
   background-color: var(--color-black-900);
   color: var(--color-black-500);
   -webkit-text-size-adjust: 100%;
@@ -43,3 +47,11 @@ a:where(:hover) {
 }
 
 // TODO: Focus ring
+a:focus,
+button:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--color-black-950),
+    0 0 0 2px var(--color-primary-500);
+  border-radius: 2px;
+}
