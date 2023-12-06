@@ -25,6 +25,16 @@ import Social from "./header/Social.astro";
     font-weight: 400;
     z-index: 1;
 
+    @include media-query(max-sm) {
+      transition-property: transform;
+      transition-duration: var(--nav-anim-duration);
+      transition-timing-function: ease-in-out;
+
+      :global(.has-active-nav) & {
+        transform: translateX(calc(var(--nav-mobile-width) * -1));
+      }
+    }
+
     @include media-query(md) {
       padding-top: 3rem;
       padding-bottom: 3rem;

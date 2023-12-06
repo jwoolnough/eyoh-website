@@ -36,39 +36,60 @@ const navItems = [
 <script>
   const HAS_ACTIVE_NAV_CLASS = "has-active-nav";
   const NAV_ACTIVE_CLASS = "is-active";
-  const ENTERING_CLASS = "is-entering";
-  const EXITING_CLASS = "is-exiting";
 
+  const nav = document.getElementById("nav");
   const navToggle = document.getElementById("nav-toggle");
   const navList = document.getElementById("nav-list");
 
-  if (!navToggle || !navList) {
+  if (!nav || !navToggle || !navList) {
     throw new Error("missing required elements");
   }
 
-  const handleClick = () => {
-    navToggle.classList.remove(ENTERING_CLASS, EXITING_CLASS);
-    navList.classList.toggle(NAV_ACTIVE_CLASS);
-    document.documentElement.classList.toggle(HAS_ACTIVE_NAV_CLASS);
+  const onOpen = () => {
+    navList.classList.add(NAV_ACTIVE_CLASS);
+    navToggle.classList.add(NAV_ACTIVE_CLASS);
+    document.documentElement.classList.add(HAS_ACTIVE_NAV_CLASS);
 
-    navToggle.classList.add(
-      !navList.classList.contains(NAV_ACTIVE_CLASS)
-        ? ENTERING_CLASS
-        : EXITING_CLASS,
-    );
+    document.documentElement.addEventListener("click", handleOutsideClick);
   };
 
-  navToggle.addEventListener("click", handleClick);
+  const onClose = () => {
+    navList.classList.remove(NAV_ACTIVE_CLASS);
+    navToggle.classList.remove(NAV_ACTIVE_CLASS);
+    document.documentElement.classList.remove(HAS_ACTIVE_NAV_CLASS);
+
+    document.documentElement.removeEventListener("click", handleOutsideClick);
+  };
+
+  const handleOutsideClick = (e: MouseEvent) => {
+    if (!(e.target instanceof HTMLElement)) {
+      return;
+    }
+
+    if (!nav.contains(e.target)) {
+      onClose();
+    }
+  };
+
+  const handleToggleClick = () => {
+    if (!navToggle.classList.contains(NAV_ACTIVE_CLASS)) {
+      onOpen();
+    } else {
+      onClose();
+    }
+  };
+
+  navToggle.addEventListener("click", handleToggleClick);
 </script>
 
-<nav class="nav">
+<nav class="nav" id="nav">
   <button
     type="button"
     class="nav__toggle"
     id="nav-toggle"
     aria-label="Toggle nav"
   >
-    <span></span>
+    <span aria-hidden="true" class="nav__burger"></span>
   </button>
 
   <ul class="nav__list" id="nav-list">
@@ -88,6 +109,11 @@ const navItems = [
 </nav>
 
 <style lang="scss">
+  :root {
+    --nav-mobile-width: 16rem;
+    --nav-anim-duration: 300ms;
+  }
+
   .nav {
     margin-left: auto;
   }
@@ -96,13 +122,98 @@ const navItems = [
     position: absolute;
     width: 2rem;
     height: 2rem;
+    top: 1.25rem;
+    right: 1.25rem;
 
     @include media-query(sm) {
       display: none;
     }
   }
 
+  .nav__burger {
+    --burger-anim-duration: calc(var(--anim-duration) * 2);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 10ms 300ms ease;
+
+    &,
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      width: 1.25rem;
+      height: 0.125rem;
+      background-color: currentColor;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      left: 0;
+      transition:
+        top 300ms 350ms ease,
+        transform 300ms 50ms ease;
+    }
+
+    &::before {
+      top: -0.375rem;
+    }
+
+    &::after {
+      top: 0.375rem;
+    }
+
+    .nav__toggle.is-active > & {
+      background-color: transparent;
+
+      &:after,
+      &:before {
+        transition:
+          top 300ms 50ms ease,
+          transform 300ms 350ms ease;
+        top: 0;
+      }
+
+      &:before {
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
   .nav__list {
+    @include media-query(max-sm) {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      height: 100dvh;
+      width: var(--nav-mobile-width);
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background-color: var(--color-black-950);
+      background-image: linear-gradient(
+        to right,
+        rgba(#000, 0.125),
+        transparent 1rem
+      );
+      transition-property: visibility;
+      transition-duration: 0s;
+      transition-delay: var(--nav-anim-duration);
+      visibility: hidden;
+      text-align: center;
+
+      &.is-active {
+        visibility: visible;
+        transition-delay: 0s;
+      }
+    }
+
     @include media-query(sm) {
       display: flex;
       margin-left: -0.75rem;
@@ -117,13 +228,22 @@ const navItems = [
   .nav__link {
     transition-property: color, opacity;
 
+    &.is-current {
+      color: var(--color-primary-500);
+    }
+
+    @include media-query(max-sm) {
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
     @include media-query(sm) {
       padding-left: 0.75rem;
       padding-right: 0.75rem;
 
       &.is-current {
         position: relative;
-        color: var(--color-primary-500);
         opacity: 1 !important;
 
         &::before {

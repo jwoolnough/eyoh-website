@@ -20,14 +20,16 @@ const { title, description } = Astro.props;
     <title>{title} | Eat Your Own Head</title>
   </head>
   <body>
-    <div class="page">
-      <Header />
-      <main class="page__content">
-        <slot />
-      </main>
-      <Footer />
+    <Header />
+    <div class="page__boundary">
+      <div class="page">
+        <main class="page__content">
+          <slot />
+        </main>
+        <Footer />
+      </div>
+      <Colophon />
     </div>
-    <Colophon />
   </body>
 </html>
 

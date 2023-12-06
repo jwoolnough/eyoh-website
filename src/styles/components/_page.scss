@@ -8,6 +8,18 @@
   min-height: 100dvh;
 }
 
+.page__boundary {
+  @include media-query(max-sm) {
+    transition-property: transform;
+    transition-duration: var(--nav-anim-duration);
+    transition-timing-function: ease-in-out;
+
+    .has-active-nav & {
+      transform: translateX(calc(var(--nav-mobile-width) * -1));
+    }
+  }
+}
+
 .page__content {
   flex-grow: 1;
 }
