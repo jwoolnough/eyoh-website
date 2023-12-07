@@ -82,6 +82,12 @@ const socialItems = [
     stroke: currentColor;
     stroke-width: 1.5;
 
+    /* Prevents weird slow nested transitions in some browsers */
+    &,
+    :global(*) {
+      transition: none;
+    }
+
     @include media-query(md) {
       width: 1.25rem;
       height: 1.25rem;
