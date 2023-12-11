@@ -1,15 +1,24 @@
 <footer class="footer" id="mailing-list">
-  <div class="container">
+  <div class="container container--sm">
     <h4>Sign up to our newsletter</h4>
+
     <form
       action="https://eatyourownhead.us17.list-manage.com/subscribe/post?u=336af7e0529acba4570fd4641&id=26f64552a4&f_id=006d61e0f0"
       method="post"
       target="_blank"
+      class="form"
     >
-      <label>Email Address</label>
-      <input type="email" name="EMAIL" required />
+      <label for="newsletter-email" class="visuallyhidden">Email Address</label>
+      <input
+        id="newsletter-email"
+        type="email"
+        name="email"
+        placeholder="Enter your email address"
+        required
+        class="form__input"
+      />
 
-      <button type="submit" class="link">Submit</button>
+      <button type="submit" class="form__submit link">Submit</button>
     </form>
   </div>
 </footer>
@@ -22,6 +31,28 @@
     @include media-query(sm) {
       padding-top: 3rem;
       padding-bottom: 3rem;
+      text-align: center;
     }
+  }
+
+  .form {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    background-color: var(--color-black-800);
+    border-radius: 0.25rem;
+  }
+
+  .form__input {
+    flex-grow: 1;
+    appearance: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0.5rem 1rem;
+    color: var(--color-white);
+  }
+
+  .form__submit {
+    margin-right: 1rem;
   }
 </style>

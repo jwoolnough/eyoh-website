@@ -51,6 +51,7 @@ const navItems = [
     document.documentElement.classList.add(HAS_ACTIVE_NAV_CLASS);
 
     document.documentElement.addEventListener("click", handleOutsideClick);
+    // TODO: Toggle aria attributes!
   };
 
   const onClose = () => {
@@ -59,6 +60,7 @@ const navItems = [
     document.documentElement.classList.remove(HAS_ACTIVE_NAV_CLASS);
 
     document.documentElement.removeEventListener("click", handleOutsideClick);
+    // TODO: Toggle aria attributes!
   };
 
   const handleOutsideClick = (e: MouseEvent) => {
@@ -150,6 +152,7 @@ const navItems = [
     &::after {
       content: "";
       left: 0;
+      // TODO: Animation is too slow here
       transition:
         top 300ms 350ms ease,
         transform 300ms 50ms ease;

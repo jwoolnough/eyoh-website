@@ -47,11 +47,11 @@ a:where(:hover) {
 }
 
 // TODO: Focus ring
-a:focus,
-button:focus {
+a:focus-visible,
+button:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 var(--color-black-950),
-    0 0 0 2px var(--color-primary-500);
+    0 0 0 2px var(--color-black-950),
+    0 0 0 4px var(--color-primary-500);
   border-radius: 2px;
 }
