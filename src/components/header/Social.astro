@@ -1,7 +1,13 @@
 ---
 import Icon from "astro-icon";
 
-const socialItems = [
+type SocialItem = {
+  title: string;
+  url: string;
+  icon: string;
+};
+
+const socialItems: SocialItem[] = [
   {
     title: "Spotify",
     url: "https://open.spotify.com/artist/6xuvJjkb2JNTf4MXK7bSyM",
@@ -44,7 +50,12 @@ const socialItems = [
   {
     socialItems.map(({ title, icon, url }) => (
       <li>
-        <a href={url} aria-label={title} class="social__link">
+        <a
+          href={url}
+          aria-label={title}
+          class="social__link"
+          rel="noopener noreferrer"
+        >
           <Icon
             name={icon}
             class:list={["social__icon", `social__icon--${icon}`]}
