@@ -3,7 +3,23 @@ import Nav from "./header/Nav.astro";
 import Social from "./header/Social.astro";
 ---
 
-<header class="header">
+<script>
+  const HEADER_SCROLLED_CLASS = "is-scrolled";
+
+  const header = document.getElementById("header");
+
+  if (!header) {
+    throw new Error("missing required element");
+  }
+
+  const handleScroll = () => {
+    header.classList.toggle(HEADER_SCROLLED_CLASS, window.scrollY > 0);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+</script>
+
+<header class="header" id="header">
   <div class="header__container container">
     <div class="header__identity">
       <a class="logo" href="/">Eat Your Own Head</a>
@@ -15,6 +31,14 @@ import Social from "./header/Social.astro";
 </header>
 
 <style lang="scss">
+  :root {
+    --header-height: 105px;
+
+    @include media-query(md) {
+      --header-height: 123px;
+    }
+  }
+
   .header {
     position: fixed;
     top: 0;
@@ -24,6 +48,16 @@ import Social from "./header/Social.astro";
     color: var(--color-white);
     font-weight: 400;
     z-index: 1;
+    transition-duration: 500ms;
+
+    &.is-scrolled {
+      background-color: color-mix(
+        in srgb,
+        var(--color-black-900) 90%,
+        transparent
+      );
+      backdrop-filter: blur(5px);
+    }
 
     @include media-query(max-sm) {
       transition-property: transform;

@@ -14,10 +14,9 @@
 }
 
 html {
-  // TODO: Webfont
   font:
     300 1em/1.5 "brother-1816",
-    sans-serif;
+    ui-system;
   background-color: var(--color-black-900);
   color: var(--color-black-500);
   -webkit-text-size-adjust: 100%;
@@ -29,7 +28,11 @@ html {
 }
 
 body {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
+
+  @include media-query(sm) {
+    font-size: 0.875rem;
+  }
 }
 
 button {
@@ -46,7 +49,6 @@ a:where(:hover) {
   color: var(--color-white);
 }
 
-// TODO: Focus ring
 a:focus-visible,
 button:focus-visible {
   outline: none;
