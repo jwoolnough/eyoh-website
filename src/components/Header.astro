@@ -53,14 +53,14 @@ import Social from "./header/Social.astro";
     &.is-scrolled {
       background-color: color-mix(
         in srgb,
-        var(--color-black-900) 90%,
+        var(--color-black-950) 90%,
         transparent
       );
       backdrop-filter: blur(5px);
     }
 
     @include media-query(max-sm) {
-      transition-property: transform;
+      transition-property: transform, background-color, backdrop-filter;
       transition-duration: var(--nav-anim-duration);
       transition-timing-function: ease-in-out;
 

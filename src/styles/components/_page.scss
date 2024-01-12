@@ -21,5 +21,9 @@
 }
 
 .page__content {
+  --page-gutter: 1.5rem;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  padding: var(--header-height) var(--page-gutter) 0;
 }

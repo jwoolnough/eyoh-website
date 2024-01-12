@@ -1,0 +1,12 @@
+.box {
+  background-color: color-mix(in srgb, var(--color-black-900) 90%, transparent);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.box--full-width {
+  margin-left: calc(var(--page-gutter) * -1);
+  margin-right: calc(var(--page-gutter) * -1);
+  border-radius: 0;
+}

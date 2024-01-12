@@ -1,7 +1,64 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
 ---
 
 <Layout title="Live">
-  <h1>The live page</h1>
+  <Fragment slot="head">
+    <script defer src="https://widget-app.songkick.com/injector/10151715"
+    ></script>
+  </Fragment>
+
+  <Hero
+    srcset="/img/tom-1000.webp 1000w, /img/tom-1500.webp 1500w, /img/tom-2000.webp 2000w"
+    alt=""
+  />
+
+  <div class="container">
+    <div class="box">
+      <h1 class="header">Upcoming Live Events</h1>
+
+      <div class="box__inner">
+        <a
+          href="https://www.songkick.com/artists/10151715"
+          class="songkick-widget"
+          data-theme="dark"
+          data-track-button="on"
+          data-detect-style="true"
+          data-background-color="transparent"
+          data-locale="en">Eat Your Own Head tour dates</a
+        >
+      </div>
+    </div>
+  </div>
 </Layout>
+
+<style lang="scss">
+  .container {
+    margin: auto;
+    padding-bottom: 1.5rem;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .box {
+    @include media-query(max-sm) {
+      margin-left: -0.75rem;
+      margin-right: -0.75rem;
+    }
+
+    @include media-query(md) {
+      padding: 3rem;
+    }
+  }
+
+  .box__inner {
+    // offset stupid forced padding of Songkick widget
+    margin-left: -1rem;
+    margin-right: -1rem;
+    color: var(--color-white);
+  }
+</style>
