@@ -25,6 +25,7 @@ const { title, description } = Astro.props;
   </head>
   <body>
     <Header />
+    <slot name="hero" />
     <div class="page__boundary">
       <div class="page">
         <main class="page__content">

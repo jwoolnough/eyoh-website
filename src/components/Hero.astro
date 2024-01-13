@@ -40,6 +40,16 @@ const { sizes = "100vw", class: className, ...props } = Astro.props;
         background-size: 83.333px 83.333px;
       }
     }
+
+    @include media-query(max-sm) {
+      transition-property: transform;
+      transition-duration: var(--nav-anim-duration);
+      transition-timing-function: ease-in-out;
+
+      :global(.has-active-nav) & {
+        transform: translateX(calc(var(--nav-mobile-width) * -1));
+      }
+    }
   }
 
   .hero__img {
