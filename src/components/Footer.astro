@@ -1,5 +1,5 @@
 <footer class="footer" id="mailing-list">
-  <div class="container">
+  <div class="container container--md">
     <h4 class="header">Sign up to our newsletter</h4>
 
     <form
@@ -44,15 +44,19 @@
       display: flex;
       gap: 1.5rem;
       align-items: center;
-      justify-content: center;
     }
   }
 
   .form {
     display: flex;
+    flex-grow: 1;
     align-items: center;
     background-color: var(--color-black-800);
     border-radius: 0.25rem;
+
+    &:has(.form__input:focus) {
+      box-shadow: 0 0 0 2px var(--color-primary-500);
+    }
 
     @include media-query(max-sm) {
       margin-top: 1rem;
@@ -66,10 +70,6 @@
     outline: none;
     padding: 0.5rem 1rem;
     color: var(--color-white);
-
-    @include media-query(sm) {
-      min-width: 18rem;
-    }
   }
 
   .form__submit {

@@ -13,19 +13,48 @@ import Layout from "@/layouts/Layout.astro";
   />
 
   <div class="box box--full-width content">
-    <div class="container">
+    <div class="container container--md content__row">
+      <a
+        href="https://www.eventbrite.co.uk/e/eat-your-own-head-tickets-776295228927"
+        target="_blank"
+        rel="noopener"
+        class="content__figure"
+      >
+        <img
+          srcset="/img/news/voodoos-jan-152.webp 152, /img/news/voodoos-jan-304.webp 304w"
+          sizes="152px"
+          width="152"
+          height="152"
+          alt="Voodoo Daddy's headline show poster"
+          loading="lazy"
+        />
+      </a>
+
       <div class="content__inner">
-        <h1>New single 'Chest Pains' out now</h1>
+        <h1>Norwich Headline Show - tickets on sale now</h1>
 
         <p>
-          We are pleased to announce our new single Chest Pains. Now available
-          on all digital platforms, and our EP is available for pre-order on CD
-          or vinyl
+          Buy tickets for our upcoming headline show at the new Voodoo Daddy's
+          venue. Support from <a
+            href="https://jomotuun.bandcamp.com/album/one-tuun"
+            target="_blank"
+            rel="noopener">Jomo Tuun</a
+          > and <a
+            href="https://www.instagram.com/withteethband/"
+            target="_blank"
+            rel="noopener">With Teeth</a
+          >.
         </p>
 
         <ul class="actions">
-          <li><a href="#" class="link">Listen</a></li>
-          <li><a href="#" class="link">Pre-order</a></li>
+          <li>
+            <a
+              href="https://www.eventbrite.co.uk/e/eat-your-own-head-tickets-776295228927"
+              target="_blank"
+              rel="noopener"
+              class="link">Book Tickets</a
+            >
+          </li>
         </ul>
       </div>
     </div>
@@ -42,7 +71,38 @@ import Layout from "@/layouts/Layout.astro";
     }
   }
 
-  .content__inner > * + * {
+  .content__row {
+    @include media-query(sm) {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+  }
+
+  .content__figure {
+    flex-shrink: 0;
+    filter: grayscale(1);
+
+    @include media-query(max-sm) {
+      display: none;
+    }
+  }
+
+  .content__inner {
+    :where(a:not([class])) {
+      color: var(--color-black-300);
+      text-decoration: underline;
+      text-decoration-color: var(--color-black-700);
+      text-underline-offset: 2px;
+
+      &:hover {
+        color: var(--color-white);
+        text-decoration-color: var(--color-white);
+      }
+    }
+  }
+
+  .content__inner > :where(* + *) {
     margin-top: 0.5rem;
 
     @include media-query(sm) {

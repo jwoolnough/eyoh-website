@@ -62,7 +62,7 @@ const { sizes = "100vw", class: className, ...props } = Astro.props;
     mask-image: linear-gradient(
       to bottom,
       transparent,
-      #000 var(--header-height)
+      #000 calc(var(--header-height) * 2)
     );
   }
 

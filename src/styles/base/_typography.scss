@@ -26,6 +26,6 @@ h4 {
   font-size: 0.875rem;
 
   @include media-query(sm) {
-    font-size: 1.125rem;
+    font-size: 1;
   }
 }

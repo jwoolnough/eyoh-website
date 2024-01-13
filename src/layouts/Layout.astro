@@ -19,7 +19,11 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <title>{title} | Eat Your Own Head</title>
+
+    <link rel="preconnect" href="https://use.typekit.net" />
+    <link rel="preconnect" href="https://p.typekit.net" />
     <link rel="stylesheet" href="https://use.typekit.net/rnw6tcb.css" />
+
     <slot name="head" />
     <ViewTransitions />
   </head>
@@ -42,7 +46,9 @@ const { title, description } = Astro.props;
   :root {
     --color-primary-500: #dc9d76;
     --color-white: #fff;
+    --color-black-300: #ccc;
     --color-black-500: #8b8b8b;
+    --color-black-700: #444;
     --color-black-800: #2a2a2a;
     --color-black-900: #1a1a1a;
     --color-black-950: #121212;
