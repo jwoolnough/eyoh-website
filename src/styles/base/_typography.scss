@@ -22,10 +22,14 @@ h1 {
   }
 }
 
-h4 {
-  font-size: 0.875rem;
+h2 {
+  font-size: 1rem;
 
   @include media-query(sm) {
-    font-size: 1;
+    font-size: 1.125rem;
   }
+}
+
+h4 {
+  font-size: 0.875rem;
 }
