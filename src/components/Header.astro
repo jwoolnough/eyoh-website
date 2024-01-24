@@ -4,19 +4,22 @@ import Social from "./header/Social.astro";
 ---
 
 <script>
-  const HEADER_SCROLLED_CLASS = "is-scrolled";
-
   const header = document.getElementById("header");
 
   if (!header) {
-    throw new Error("missing required element");
+    throw new Error("missing required elements");
   }
 
-  const handleScroll = () => {
-    header.classList.toggle(HEADER_SCROLLED_CLASS, window.scrollY > 0);
-  };
+  const scrollWatcher = document.createElement("div");
 
-  window.addEventListener("scroll", handleScroll);
+  scrollWatcher.setAttribute("data-scroll-watcher", "");
+  header.before(scrollWatcher);
+
+  const observer = new IntersectionObserver((entries) => {
+    header.classList.toggle("is-scrolled", !entries[0].isIntersecting);
+  });
+
+  observer.observe(scrollWatcher);
 </script>
 
 <header class="header" id="header">
