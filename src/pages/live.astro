@@ -18,7 +18,7 @@ import Hero from "@/components/Hero.astro";
   />
 
   <div class="container">
-    <div class="box">
+    <div class="box box--bleed box--md">
       <h1 class="header">Upcoming Live Events</h1>
 
       <div class="box__inner">
@@ -37,27 +37,6 @@ import Hero from "@/components/Hero.astro";
 </Layout>
 
 <style lang="scss">
-  .container {
-    margin: auto;
-    padding-bottom: 1.5rem;
-  }
-
-  .header {
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .box {
-    @include media-query(max-sm) {
-      margin-left: -0.75rem;
-      margin-right: -0.75rem;
-    }
-
-    @include media-query(md) {
-      padding: 3rem;
-    }
-  }
-
   .box__inner {
     // offset stupid forced padding of Songkick widget
     margin-left: -1rem;

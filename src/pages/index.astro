@@ -64,6 +64,8 @@ import Layout from "@/layouts/Layout.astro";
 <style lang="scss">
   .content {
     margin-top: auto;
+    // Offset page gutter so strips are flush
+    margin-bottom: calc(var(--page-gutter) * -1);
 
     @include media-query(md) {
       padding-top: 3rem;
