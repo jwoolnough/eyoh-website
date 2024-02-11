@@ -1,6 +1,8 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
+
+const showNews = false;
 ---
 
 <Layout title="Home">
@@ -12,53 +14,67 @@ import Layout from "@/layouts/Layout.astro";
     slot="hero"
   />
 
-  <div class="box box--full-width content">
-    <div class="container container--md content__row">
-      <a
-        href="https://www.voodoodaddysshowroom.co.uk/listing_single/1702394432967x163742540127535100"
-        target="_blank"
-        rel="noopener"
-        class="content__figure"
-      >
-        <img
-          srcset="/img/news/voodoos-jan-152.webp 152, /img/news/voodoos-jan-304.webp 304w"
-          sizes="152px"
-          width="152"
-          height="152"
-          alt="Voodoo Daddy's headline show poster"
-          loading="lazy"
-        />
-      </a>
-
-      <div class="content__inner">
-        <h1>Norwich Headline Show - tickets on sale now</h1>
-
-        <p>
-          Buy tickets for our upcoming headline show at the new Voodoo Daddy's
-          venue. Support from <a
-            href="https://jomotuun.bandcamp.com/album/one-tuun"
+  {
+    showNews && (
+      <div class="box box--full-width content">
+        <div class="container container--md content__row">
+          <a
+            href="https://www.voodoodaddysshowroom.co.uk/listing_single/1702394432967x163742540127535100"
             target="_blank"
-            rel="noopener">Jomo Tuun</a
-          > and <a
-            href="https://www.instagram.com/withteethband/"
-            target="_blank"
-            rel="noopener">With Teeth</a
-          >.
-        </p>
+            rel="noopener"
+            class="content__figure"
+          >
+            <img
+              srcset="/img/news/voodoos-jan-152.webp 152, /img/news/voodoos-jan-304.webp 304w"
+              sizes="152px"
+              width="152"
+              height="152"
+              alt="Voodoo Daddy's headline show poster"
+              loading="lazy"
+            />
+          </a>
 
-        <ul class="actions">
-          <li>
-            <a
-              href="https://www.voodoodaddysshowroom.co.uk/listing_single/1702394432967x163742540127535100"
-              target="_blank"
-              rel="noopener"
-              class="link">Book Tickets</a
-            >
-          </li>
-        </ul>
+          <div class="content__inner">
+            <h1>Norwich Headline Show - tickets on sale now</h1>
+
+            <p>
+              Buy tickets for our upcoming headline show at the new Voodoo
+              Daddy's venue. Support from{" "}
+              <a
+                href="https://jomotuun.bandcamp.com/album/one-tuun"
+                target="_blank"
+                rel="noopener"
+              >
+                Jomo Tuun
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://www.instagram.com/withteethband/"
+                target="_blank"
+                rel="noopener"
+              >
+                With Teeth
+              </a>
+              .
+            </p>
+
+            <ul class="actions">
+              <li>
+                <a
+                  href="https://www.voodoodaddysshowroom.co.uk/listing_single/1702394432967x163742540127535100"
+                  target="_blank"
+                  rel="noopener"
+                  class="link"
+                >
+                  Book Tickets
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    )
+  }
 </Layout>
 
 <style lang="scss">
