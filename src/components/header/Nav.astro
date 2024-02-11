@@ -39,54 +39,63 @@ const navItems: NavItem[] = [
 ---
 
 <script>
-  const HAS_ACTIVE_NAV_CLASS = "has-active-nav";
-  const NAV_ACTIVE_CLASS = "is-active";
+  const initialize = () => {
+    const HAS_ACTIVE_NAV_CLASS = "has-active-nav";
+    const NAV_ACTIVE_CLASS = "is-active";
 
-  const nav = document.getElementById("nav");
-  const navToggle = document.getElementById("nav-toggle");
-  const navList = document.getElementById("nav-list");
+    const nav = document.getElementById("nav");
+    const navToggle = document.getElementById("nav-toggle");
+    const navList = document.getElementById("nav-list");
 
-  if (!nav || !navToggle || !navList) {
-    throw new Error("missing required elements");
-  }
-
-  const onOpen = () => {
-    navList.classList.add(NAV_ACTIVE_CLASS);
-    navToggle.classList.add(NAV_ACTIVE_CLASS);
-    document.documentElement.classList.add(HAS_ACTIVE_NAV_CLASS);
-
-    document.documentElement.addEventListener("click", handleOutsideClick);
-    // TODO: Toggle aria attributes!
-  };
-
-  const onClose = () => {
-    navList.classList.remove(NAV_ACTIVE_CLASS);
-    navToggle.classList.remove(NAV_ACTIVE_CLASS);
-    document.documentElement.classList.remove(HAS_ACTIVE_NAV_CLASS);
-
-    document.documentElement.removeEventListener("click", handleOutsideClick);
-    // TODO: Toggle aria attributes!
-  };
-
-  const handleOutsideClick = (e: MouseEvent) => {
-    if (!(e.target instanceof HTMLElement)) {
-      return;
+    if (!nav || !navToggle || !navList) {
+      throw new Error("missing required elements");
     }
 
-    if (!nav.contains(e.target)) {
-      onClose();
-    }
+    const onOpen = () => {
+      navList.classList.add(NAV_ACTIVE_CLASS);
+      navToggle.classList.add(NAV_ACTIVE_CLASS);
+      document.documentElement.classList.add(HAS_ACTIVE_NAV_CLASS);
+
+      document.documentElement.addEventListener("click", handleOutsideClick);
+      navList.setAttribute("aria-expanded", "true");
+
+      document.addEventListener("astro:before-swap", onClose, {
+        once: true,
+      });
+    };
+
+    const onClose = () => {
+      navList.classList.remove(NAV_ACTIVE_CLASS);
+      navToggle.classList.remove(NAV_ACTIVE_CLASS);
+      document.documentElement.classList.remove(HAS_ACTIVE_NAV_CLASS);
+
+      document.documentElement.removeEventListener("click", handleOutsideClick);
+      navList.setAttribute("aria-expanded", "false");
+    };
+
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (!(e.target instanceof HTMLElement)) {
+        return;
+      }
+
+      if (!nav.contains(e.target)) {
+        onClose();
+      }
+    };
+
+    const handleToggleClick = () => {
+      if (!navToggle.classList.contains(NAV_ACTIVE_CLASS)) {
+        onOpen();
+      } else {
+        onClose();
+      }
+    };
+
+    navToggle.addEventListener("click", handleToggleClick);
   };
 
-  const handleToggleClick = () => {
-    if (!navToggle.classList.contains(NAV_ACTIVE_CLASS)) {
-      onOpen();
-    } else {
-      onClose();
-    }
-  };
-
-  navToggle.addEventListener("click", handleToggleClick);
+  initialize();
+  document.addEventListener("astro:after-swap", initialize);
 </script>
 
 <nav class="nav" id="nav">
@@ -99,7 +108,7 @@ const navItems: NavItem[] = [
     <span aria-hidden="true" class="nav__burger"></span>
   </button>
 
-  <ul class="nav__list" id="nav-list">
+  <ul class="nav__list" id="nav-list" role="menu" aria-labelledby="nav-toggle">
     {
       navItems.map(({ title, url }) => (
         <li>
