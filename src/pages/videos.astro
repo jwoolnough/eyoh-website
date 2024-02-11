@@ -1,0 +1,77 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+
+type Video = {
+  id: string;
+  title: string;
+};
+
+const videos: Video[] = [
+  {
+    id: "XaDxgy6bZRQ",
+    title: "The Concrete of Moulded Men - Music Video",
+  },
+  {
+    id: "dNITKM1OWMk",
+    title: "Denied - Music Video",
+  },
+  {
+    id: "PlGYK2lukY4",
+    title: "Bullets - Music Video",
+  },
+];
+---
+
+<Layout title="Video">
+  <Hero
+    srcset="/img/ash-arm-1000.webp 1000w, /img/ash-arm-1500.webp 1500w, /img/ash-arm-2000.webp 2000w"
+    alt="Eat Your Own Head live"
+    width="2000"
+    height="1396"
+    slot="hero"
+  />
+
+  <div class="container">
+    <div class="box box--bleed box--md">
+      <h1 class="heading">Videos</h1>
+
+      <ul class="grid">
+        {
+          videos.map(({ title, id }) => (
+            <li>
+              <iframe
+                src={`https://www.youtube.com/embed/${id}`}
+                title={title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                class="video"
+              />
+              <h4 class="title">{title}</h4>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss">
+  .grid {
+    display: grid;
+    gap: 3rem 1.5rem;
+
+    @include media-query(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .title {
+    margin-top: 1rem;
+  }
+</style>
