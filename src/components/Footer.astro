@@ -25,17 +25,20 @@
 
 <style lang="scss">
   .footer {
-    // position: sticky;
-    // bottom: 0;
     background-color: var(--color-black-950);
     padding: 1.5rem;
 
     @include media-query(sm) {
       text-align: center;
     }
+
+    @media (height >= 40em) {
+      position: sticky;
+      bottom: 0;
+    }
   }
 
-  .header {
+  .heading {
     margin: 0;
   }
 
