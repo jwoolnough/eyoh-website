@@ -1,0 +1,25 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Content from "@/components/Content.astro";
+---
+
+<Layout
+  title="Contact"
+  description="Get in touch with us for bookings and enquriries"
+  ogImage="/img/bunj-1500.webp"
+>
+  <Hero
+    srcset="/img/bunj-1000.webp 1000w, /img/bunj-1500.webp 1500w, /img/bunj-2000.webp 2000w"
+    alt="Eat Your Own Head live"
+    width="2000"
+    height="1396"
+    slot="hero"
+  />
+
+  <Content>
+    <h1 class="heading">Contact</h1>
+  </Content>
+</Layout>
+
+<style lang="scss"></style>
