@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import Content from "@/components/Content.astro";
 
 type Video = {
   id: string;
@@ -36,28 +37,26 @@ const videos: Video[] = [
     slot="hero"
   />
 
-  <div class="container">
-    <div class="box box--bleed box--md">
-      <h1 class="heading">Videos</h1>
+  <Content>
+    <h1 class="heading">Videos</h1>
 
-      <ul class="grid">
-        {
-          videos.map(({ title, id }) => (
-            <li>
-              <iframe
-                src={`https://www.youtube.com/embed/${id}`}
-                title={title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                class="video"
-              />
-              <h4 class="title">{title}</h4>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </div>
+    <ul class="grid">
+      {
+        videos.map(({ title, id }) => (
+          <li>
+            <iframe
+              src={`https://www.youtube.com/embed/${id}`}
+              title={title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              class="video"
+            />
+            <h4 class="title">{title}</h4>
+          </li>
+        ))
+      }
+    </ul>
+  </Content>
 </Layout>
 
 <style lang="scss">

@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import Content from "@/components/Content.astro";
 ---
 
 <Layout
@@ -21,23 +22,21 @@ import Hero from "@/components/Hero.astro";
     slot="hero"
   />
 
-  <div class="container">
-    <div class="box box--bleed box--md">
-      <h1 class="heading">Upcoming Live Events</h1>
+  <Content>
+    <h1 class="heading">Upcoming Live Events</h1>
 
-      <div class="box__inner">
-        <a
-          href="https://www.songkick.com/artists/10151715"
-          class="songkick-widget"
-          data-theme="dark"
-          data-track-button="on"
-          data-detect-style="true"
-          data-background-color="transparent"
-          data-locale="en">Eat Your Own Head tour dates</a
-        >
-      </div>
+    <div class="box__inner">
+      <a
+        href="https://www.songkick.com/artists/10151715"
+        class="songkick-widget"
+        data-theme="dark"
+        data-track-button="on"
+        data-detect-style="true"
+        data-background-color="transparent"
+        data-locale="en">Eat Your Own Head tour dates</a
+      >
     </div>
-  </div>
+  </Content>
 </Layout>
 
 <style lang="scss">
