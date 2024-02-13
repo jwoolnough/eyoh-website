@@ -17,9 +17,51 @@ import Content from "@/components/Content.astro";
     slot="hero"
   />
 
-  <Content>
+  <Content class="contact">
     <h1 class="heading">Contact</h1>
+    <p>
+      Get in touch with us via the below emails for bookings and general
+      enquiries:
+    </p>
+
+    <dl class="grid">
+      <div>
+        <dt>Bookings</dt>
+        <dd>
+          <a href="mailto:ash@drongorecords.com" class="link"
+            >ash@drongorecords.com</a
+          >
+        </dd>
+      </div>
+      <div>
+        <dt>Band</dt>
+        <dd>
+          <a href="mailto:eatyourownhead@gmail.com" class="link"
+            >eatyourownhead@gmail.com</a
+          >
+        </dd>
+      </div>
+    </dl>
   </Content>
 </Layout>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .contact {
+    max-width: 48rem;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .grid {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+
+    dt {
+      color: var(--color-white);
+      margin-bottom: 0.25rem;
+    }
+  }
+</style>
