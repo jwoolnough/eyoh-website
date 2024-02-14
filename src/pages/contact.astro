@@ -56,12 +56,15 @@ import Content from "@/components/Content.astro";
   .grid {
     margin-top: 1.5rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-gap: 1.5rem;
 
     dt {
       color: var(--color-white);
       margin-bottom: 0.25rem;
+    }
+
+    @include media-query(sm) {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>
