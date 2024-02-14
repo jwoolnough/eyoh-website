@@ -1,0 +1,21 @@
+.select {
+  position: relative;
+
+  select {
+    appearance: none;
+    width: 100%;
+    border-radius: 2px;
+    padding: 0.5rem 1rem;
+  }
+
+  svg {
+    position: absolute;
+    fill: currentColor;
+    pointer-events: none;
+    width: 1rem;
+    height: 1rem;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
