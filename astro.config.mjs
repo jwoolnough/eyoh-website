@@ -1,6 +1,8 @@
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 
+import vercel from "@astrojs/vercel/serverless";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [icon()],
@@ -10,11 +12,12 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           additionalData: '@import "./src/styles/tools/media-query";'
-        },
-      },
-    },
+        }
+      }
+    }
   },
   devToolbar: {
-    enabled: false,
+    enabled: false
   },
+  adapter: vercel()
 });
