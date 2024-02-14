@@ -2,7 +2,170 @@
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import Content from "@/components/Content.astro";
+
+type Product = {
+  name: string;
+  id: string;
+};
+
+const products: Product[] = [
+  {
+    name: "EYOH Mega combo deal",
+    id: "8902970835271",
+  },
+  {
+    name: "Mantis T-Shirt Green",
+    id: "8902924239175",
+  },
+  {
+    name: "Mantis T-Shirt",
+    id: "8902971523399",
+  },
+  {
+    name: "Neck-Deep in the Blyth - CD",
+    id: "8902969360711",
+  },
+  {
+    name: "Neck-Deep in the Blyth - Gatefold Vinyl",
+    id: "8902872105287",
+  },
+];
 ---
+
+<script is:inline>
+  (function () {
+    var scriptURL =
+      "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
+    if (window.ShopifyBuy) {
+      if (window.ShopifyBuy.UI) {
+        ShopifyBuyInit();
+      } else {
+        loadScript();
+      }
+    } else {
+      loadScript();
+    }
+
+    function loadScript() {
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = scriptURL;
+      (
+        document.getElementsByTagName("head")[0] ||
+        document.getElementsByTagName("body")[0]
+      ).appendChild(script);
+      script.onload = ShopifyBuyInit;
+    }
+
+    function ShopifyBuyInit() {
+      var client = ShopifyBuy.buildClient({
+        domain: "9d03b2.myshopify.com",
+        storefrontAccessToken: "29f7822b8290553281222c378c38111e",
+      });
+
+      ShopifyBuy.UI.onReady(client).then(function (ui) {
+        var options = {
+          product: {
+            iframe: false,
+            text: {
+              button: "Add to cart",
+            },
+            classes: {
+              product: "product__inner",
+              buttonWrapper: "button__wrapper",
+              button: "link",
+              options: "select",
+              prices: "prices",
+            },
+          },
+          modalProduct: {
+            contents: {
+              img: false,
+              imgWithCarousel: true,
+              button: false,
+              buttonWithQuantity: true,
+            },
+            styles: {
+              product: {
+                "@media (min-width: 601px)": {
+                  "max-width": "100%",
+                  "margin-left": "0px",
+                  "margin-bottom": "0px",
+                },
+              },
+              button: {
+                color: "#000000",
+                ":hover": {
+                  color: "#000000",
+                  "background-color": "#e4e6e3",
+                },
+                "background-color": "#fdfffc",
+                ":focus": {
+                  "background-color": "#e4e6e3",
+                },
+              },
+            },
+            text: {
+              button: "Add to cart",
+            },
+          },
+          option: {},
+          cart: {
+            styles: {
+              button: {
+                color: "#000000",
+                ":hover": {
+                  color: "#000000",
+                  "background-color": "#e4e6e3",
+                },
+                "background-color": "#fdfffc",
+                ":focus": {
+                  "background-color": "#e4e6e3",
+                },
+              },
+            },
+            text: {
+              total: "Subtotal",
+              button: "Checkout",
+            },
+          },
+          toggle: {
+            styles: {
+              toggle: {
+                "background-color": "#fdfffc",
+                ":hover": {
+                  "background-color": "#e4e6e3",
+                },
+                ":focus": {
+                  "background-color": "#e4e6e3",
+                },
+              },
+              count: {
+                color: "#000000",
+                ":hover": {
+                  color: "#000000",
+                },
+              },
+              iconPath: {
+                fill: "#000000",
+              },
+            },
+          },
+        };
+        var products = document.querySelectorAll("[data-product]");
+
+        products.forEach((product) => {
+          ui.createComponent("product", {
+            id: product.getAttribute("data-product-id"),
+            node: product,
+            moneyFormat: "%C2%A3%7B%7Bamount%7D%7D",
+            options: options,
+          });
+        });
+      });
+    }
+  })();
+</script>
 
 <Layout
   title="Merch"
@@ -19,7 +182,62 @@ import Content from "@/components/Content.astro";
 
   <Content>
     <h1 class="heading">Merch</h1>
+
+    <div class="grid">
+      {
+        products.map(({ id, name }) => (
+          <div
+            data-product
+            data-product-id={id}
+            data-product-name={name}
+            class="product"
+          />
+        ))
+      }
+    </div>
   </Content>
 </Layout>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .grid {
+    display: grid;
+    grid-gap: 3rem 1.5rem;
+
+    @media (width > 36em) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-query(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .product {
+    display: flex;
+
+    :global(.product__inner) {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    :global(img) {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+    }
+
+    :global(h1) {
+      font-size: 1.175rem;
+    }
+
+    :global(.prices) {
+      margin-bottom: 1.5rem;
+    }
+
+    :global(.select) {
+      margin-top: auto;
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>
