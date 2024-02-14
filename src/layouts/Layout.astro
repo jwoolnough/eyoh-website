@@ -54,33 +54,33 @@ const title = `${baseTitle} | Eat Your Own Head`;
       </div>
       <Colophon />
     </div>
-  </body>
+  </body><style is:global lang="scss">
+    :root {
+      --color-primary-500: #dc9d76;
+      --color-white: #fff;
+      --color-black-300: #ccc;
+      --color-black-500: #8b8b8b;
+      --color-black-700: #444;
+      --color-black-800: #2a2a2a;
+      --color-black-900: #1a1a1a;
+      --color-black-950: #121212;
+      --color-invalid: #f88789;
+      --color-valid: #59c788;
+
+      --anim-duration: 200ms;
+    }
+
+    @import "@/styles/base/reset";
+    @import "@/styles/base/global";
+    @import "@/styles/base/typography";
+
+    @import "@/styles/components/box";
+    @import "@/styles/components/button";
+    @import "@/styles/components/container";
+    @import "@/styles/components/heading";
+    @import "@/styles/components/page";
+    @import "@/styles/components/select";
+
+    @import "@/styles/utils/accessibility";
+  </style>
 </html>
-
-<style is:global lang="scss">
-  :root {
-    --color-primary-500: #dc9d76;
-    --color-white: #fff;
-    --color-black-300: #ccc;
-    --color-black-500: #8b8b8b;
-    --color-black-700: #444;
-    --color-black-800: #2a2a2a;
-    --color-black-900: #1a1a1a;
-    --color-black-950: #121212;
-
-    --anim-duration: 200ms;
-  }
-
-  @import "@/styles/base/reset";
-  @import "@/styles/base/global";
-  @import "@/styles/base/typography";
-
-  @import "@/styles/components/box";
-  @import "@/styles/components/button";
-  @import "@/styles/components/container";
-  @import "@/styles/components/heading";
-  @import "@/styles/components/page";
-  @import "@/styles/components/select";
-
-  @import "@/styles/utils/accessibility";
-</style>

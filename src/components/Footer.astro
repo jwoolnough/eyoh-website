@@ -1,40 +1,111 @@
+<script>
+  type SubscribeData = {
+    success: boolean;
+    message: string;
+  };
+
+  const initialize = () => {
+    const form = document.getElementById("mailing-list-form");
+    const message = document.getElementById("mailing-list-message");
+
+    if (!form || !(form instanceof HTMLFormElement) || !message) {
+      throw new Error("missing required elements");
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        body: new FormData(form),
+      });
+
+      const data = (await res.json()) as SubscribeData;
+
+      message.classList.remove("is-success", "is-error");
+      message.classList.add(
+        "is-active",
+        data.success ? "is-success" : "is-error",
+      );
+      message.innerHTML = data.message;
+
+      setTimeout(() => message.classList.remove("is-active"), 5000);
+    });
+  };
+
+  initialize();
+  document.addEventListener("astro:after-swap", initialize);
+</script>
+
 <footer class="footer" id="mailing-list">
-  <div class="container container--md">
-    <h4 class="heading">Sign up to our newsletter</h4>
+  <div class="footer__message" id="mailing-list-message"></div>
+  <div class="footer__inner">
+    <div class="container container--md">
+      <h4 class="heading">Sign up to our newsletter</h4>
 
-    <form
-      action="https://eatyourownhead.us17.list-manage.com/subscribe/post?u=336af7e0529acba4570fd4641&id=26f64552a4&f_id=006d61e0f0"
-      method="post"
-      target="_blank"
-      class="form"
-    >
-      <label for="newsletter-email" class="visuallyhidden">Email Address</label>
-      <input
-        id="newsletter-email"
-        type="email"
-        name="email"
-        placeholder="Enter your email address"
-        required
-        class="form__input"
-      />
+      <form method="post" class="form" id="mailing-list-form">
+        <label for="newsletter-email" class="visuallyhidden"
+          >Email Address</label
+        >
+        <input
+          id="newsletter-email"
+          type="email"
+          name="email"
+          placeholder="Enter your email address"
+          required
+          class="form__input"
+        />
 
-      <button type="submit" class="form__submit link">Submit</button>
-    </form>
+        <button type="submit" class="form__submit link">Submit</button>
+      </form>
+    </div>
   </div>
 </footer>
 
 <style lang="scss">
   .footer {
+    @media (height >= 40em) {
+      position: sticky;
+      bottom: 0;
+    }
+  }
+
+  .footer__inner {
     background-color: var(--color-black-950);
     padding: 1.5rem;
+    position: relative;
 
     @include media-query(sm) {
       text-align: center;
     }
+  }
 
-    @media (height >= 40em) {
-      position: sticky;
-      bottom: 0;
+  .footer__message {
+    position: absolute;
+    left: 0;
+    text-wrap: pretty;
+    right: 0;
+    margin-inline: auto;
+    bottom: calc(100% + 1.5rem);
+    transform: translateY(100%) translateY(1.5rem);
+    transition: transform ease-in-out 300ms;
+    width: min(40rem, 100% - 3rem);
+    background-color: var(--color-white);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+
+    &.is-active {
+      transform: none;
+    }
+
+    &.is-error {
+      background-color: var(--color-invalid);
+      color: var(--color-white);
+    }
+
+    &.is-success {
+      background-color: var(--color-valid);
+      color: var(--color-white);
     }
   }
 
