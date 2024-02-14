@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import client, {
-  type lists,
   type ErrorResponse,
 } from "@mailchimp/mailchimp_marketing";
 
