@@ -1,0 +1,48 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Content from "@/components/Content.astro";
+---
+
+<Layout
+  title="Page not found"
+  description="Page not found, please check the URL has been entered correctly"
+  ogImage="/img/ash-new-voodoo-1500.webp"
+>
+  <Hero
+    srcset="/img/ash-new-voodoo-1000.webp 1000w, /img/ash-new-voodoo-1500.webp 1500w, /img/ash-new-voodoo-2000.webp 2000w"
+    alt="Eat Your Own Head live"
+    width="2000"
+    height="1396"
+    slot="hero"
+    class="not-found__hero"
+  />
+
+  <div class="container">
+    <h1 class="heading">Page not found</h1>
+    <p>Please check the URL has been entered correctly.</p>
+    <p><a href="/" class="link">Back home</a></p>
+  </div>
+</Layout>
+
+<style lang="scss">
+  .not-found__hero {
+    opacity: 0.5;
+  }
+
+  .container {
+    text-align: center;
+    margin-top: auto;
+    color: var(--color-white);
+
+    > * + * {
+      margin-top: 1rem;
+    }
+  }
+
+  .heading {
+    @include media-query(sm) {
+      font-size: 3rem;
+    }
+  }
+</style>
