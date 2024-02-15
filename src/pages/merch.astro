@@ -216,6 +216,11 @@ const products: Product[] = [
   .product {
     display: flex;
 
+    &:global(:not(.shopify-buy-frame)) {
+      aspect-ratio: 1 / 1;
+      background-color: rgba(#fff, 0.05);
+    }
+
     :global(.product__inner) {
       display: flex;
       flex-direction: column;
