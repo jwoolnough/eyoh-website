@@ -1,0 +1,13 @@
+.heading {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.lede {
+  font-size: 1rem;
+  color: var(--color-white);
+}
+
+.typography > * + * {
+  margin-top: 1.5rem;
+}

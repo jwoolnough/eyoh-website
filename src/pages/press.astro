@@ -1,0 +1,97 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Content from "@/components/Content.astro";
+
+type Quote = {
+  content: string;
+  source: string;
+};
+
+const quotes: Quote[] = [
+  {
+    content:
+      "Quite the wildcard, leaping and bounding through a variety of styles and tones with no end of confidence...an exhilarating assortment of sensations that has boundless replayability as you try to wrap your head around it. EAT YOUR OWN HEAD have evidently poured a lot of imagination and inventiveness into this release and it has paid off emphatically.",
+    source: "Distorted Sound [9/10]",
+  },
+  {
+    content:
+      "Sit with this record, try and digest what in tarnation is going on, but enjoy what they have to offer, as it is engrossing and enjoyable in almost every moment.",
+    source: "Noizze [8/10]",
+  },
+  {
+    content:
+      "The best rock album of the year for 2022...keeps growing on me, and I couldn’t have more fun getting into their dark, grungy yet fun sound",
+    source: "Everything Is Noise",
+  },
+  {
+    content:
+      "Phenomenal... pulls from all kinds of stuff, from abrasive and aggressive noise rock, to winding proggy Mastodon/TOOL-isms, to sparkly little mathy bits... a dynamic and often utterly raging listen that will no doubt be even more fun to behold live",
+    source: "Noob Heavy",
+  },
+];
+---
+
+<Layout
+  title="Press"
+  description="Download our press materials and resources"
+  ogImage="/img/ben-new-voodoos-1500.webp"
+>
+  <Hero
+    srcset="/img/ben-new-voodoos-1000.webp 1000w, /img/ben-new-voodoos-1500.webp 1500w, /img/ben-new-voodoos-2000.webp 2000w"
+    alt="Eat Your Own Head live"
+    width="2000"
+    height="1396"
+    slot="hero"
+  />
+
+  <Content class="press-content container--md">
+    <h1 class="heading">Press</h1>
+    <div class="typography">
+      <p class="lede">
+        Eat Your Own Head (EYOH) are an alternative rock band based in Norwich
+        and London. In May 2022 the band released their debut album 'Neck-Deep
+        in the Blyth' to wide critical acclaim from BBC 6 music, Distorted Sound
+        and many more.
+      </p>
+      <p>
+        Since the album release EYOH have performed two headline tours as well
+        as supporting artists such as Ditz, Acid Mothers Temple, and The
+        St.Pierre Snake Invasion. The rest of 2023 includes an Ireland Tour in
+        September and the band has just received funding support from Help
+        Musicians for an EP release due May 2024.
+      </p>
+      <p>
+        Drawn together by a collective yearning to play extremely loud music,
+        Eat Your Own Head present an enticing blend of rich, heavy alt-rock that
+        sidesteps some of the genres more obvious pitfalls and replaces them
+        instead with muscular vocals, hooks, and a technical and unpredictable
+        musicality.
+      </p>
+
+      {
+        quotes.map(({ content, source }) => (
+          <blockquote>
+            <p class="lede">&ldquo;{content}&rdquo;</p>
+            <span>- {source}</span>
+          </blockquote>
+        ))
+      }
+
+      <p>
+        <a
+          href="https://drive.google.com/drive/folders/14Dnk6LIgL1tvfu4bPsJhhiQCtfIcODmD?usp=sharing"
+          target="_blank"
+          rel="noopener"
+          class="link">Download press materials</a
+        >
+      </p>
+    </div>
+  </Content>
+</Layout>
+
+<style lang="scss">
+  .press-content {
+    margin-block: auto;
+  }
+</style>

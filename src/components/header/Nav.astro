@@ -23,10 +23,10 @@ const navItems: NavItem[] = [
     title: "Videos",
     url: "/videos",
   },
-  // {
-  //   title: "Press",
-  //   url: "/press",
-  // },
+  {
+    title: "Press",
+    url: "/press",
+  },
   {
     title: "Merch",
     url: "/merch",
@@ -108,7 +108,7 @@ const navItems: NavItem[] = [
     <span aria-hidden="true" class="nav__burger"></span>
   </button>
 
-  <ul class="nav__list" id="nav-list" role="menu" aria-labelledby="nav-toggle">
+  <ul class="nav__list" id="nav-list" aria-labelledby="nav-toggle">
     {
       navItems.map(({ title, url }) => (
         <li>

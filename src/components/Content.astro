@@ -6,8 +6,14 @@ interface Props extends HTMLAttributes<"div"> {}
 const { class: className, ...props } = Astro.props;
 ---
 
-<div class:list={["container", className]} {...props}>
+<div class:list={["container content", className]} {...props}>
   <div class="box box--bleed box--md">
     <slot />
   </div>
 </div>
+
+<style lang="scss">
+  .content {
+    view-transition-name: content;
+  }
+</style>
